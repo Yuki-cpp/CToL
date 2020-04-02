@@ -55,7 +55,7 @@ struct next_generation_helper
         neighbors>::type;
 
     using new_grid = typename ctol::set<typename ConwayGrid::grid, current, new_state>::type;
-    using new_conway_grid = ctol::conway_grid<typename ConwayGrid::size, new_grid>;
+    using new_conway_grid = ctol::conway_grid<new_grid, typename ConwayGrid::size>;
 
     using type = std::conditional_t<
         current == 1,

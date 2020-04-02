@@ -46,12 +46,12 @@ template<typename ConwayGrid>
 struct printer;
 
 template<std::size_t X, std::size_t Y, typename Grid>
-struct printer<ctol::conway_grid<ctol::point<X, Y>, Grid>>
+struct printer<ctol::conway_grid<Grid, ctol::point<X, Y>>>
 {
     using first_row = ctol::get_n_first_cells<Grid, X>::type;
     constexpr static std::size_t left_over_count = X * (Y - 1);
     using left_over =
-        conway_grid<point<X, Y - 1>, typename ctol::get_n_last_cells<Grid, left_over_count>::type>;
+        conway_grid<typename ctol::get_n_last_cells<Grid, left_over_count>::type, point<X, Y - 1>>;
 
     static void print()
     {
@@ -61,7 +61,7 @@ struct printer<ctol::conway_grid<ctol::point<X, Y>, Grid>>
 };
 
 template<std::size_t X>
-struct printer<conway_grid<point<X, 0>, ctol::cell_list<>>>
+struct printer<ctol::conway_grid<ctol::cell_list<>, ctol::point<X, 0>>>
 {
     static void print() {}
 };
